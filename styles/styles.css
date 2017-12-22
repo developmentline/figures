@@ -1,0 +1,27 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.root {
+    background-color: #f8f8f8;
+    height: 100vh;
+    width: 100vw;
+}
+
+.drawing-area-container {
+    margin: auto;
+    width: 80%;
+}
+
+.drawing-area-wrapper {
+    background-color: #fff;
+    height:  600px;
+    margin: auto;
+    width: 600px;
+}
+
+#drawing-area {
+    border: 1px solid #d3d3d3;
+    margin: auto;
+}
