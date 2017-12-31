@@ -1,6 +1,7 @@
 body {
     margin: 0;
     padding: 0;
+    font-family: 'Source Sans Pro',Futura,arial,sans-serif;
 }
 
 .root {
@@ -23,5 +24,91 @@ body {
 
 #drawing-area {
     border: 1px solid #d3d3d3;
+    border-radius: 2px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     margin: auto;
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 }
+
+#drawing-area:hover {
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.notes-wrapper {
+    background: rgb(255, 255, 255);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    height: 300px;
+    position: absolute;
+    width: 300px;
+    top: 0;
+    right: 0;
+}
+
+.points, .areas {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.points > li, .areas > li {
+    box-sizing: border-box;
+    padding: 10px 20px;
+}
+
+.controls {
+    bottom: 0;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+}
+
+.btn {
+    background-color: #2ecc71;
+    border-radius: 2px;
+    border-width: 0;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+    color: #ecf0f1;
+    cursor: pointer;
+    margin: 30px auto;
+    outline: none;
+    overflow: hidden;
+    padding: 0;
+    position: relative;
+    transition: background-color .3s;
+  }
+
+  .btn:hover, .btn:focus {
+    background-color: #27ae60;
+  }
+
+  .btn > * {
+    position: relative;
+  }
+
+  .btn span {
+    display: block;
+    padding: 12px 24px;
+  }
+
+  .btn:before {
+    background-color: rgba(236, 240, 241, .3);
+    border-radius: 100%;
+    content: "";
+    display: block;
+    left: 50%;
+    padding-top: 0;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 0;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+  }
+
+  .btn:active:before {
+    padding-top: 120%;
+    transition: width .2s ease-out, padding-top .2s ease-out;
+    width: 120%;
+  }

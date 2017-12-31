@@ -11,7 +11,8 @@ module.exports = function(config) {
         // list of files / patterns to load in the browser
         //  note: IS ORDER-DEPENDENT
         files: [
-            'scripts/*.js'
+            'scripts/**.js',
+            '__test__/**.spec.js'
         ],
 
         // web server port
