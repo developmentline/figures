@@ -2,15 +2,37 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>Figures</title>
+    <link rel="stylesheet" href="./styles/styles.css">
 </head>
 <body>
    <section class="root">
+        <div class="notes-wrapper">
+            <div class="notes">
+                <ul class="points" id="points-section"></ul>
+                <ul class="areas" id="areas-section"></ul>
+            </div>
+            <div class="controls">
+                <button class="btn" id="about-button">
+                    <span>About</span>
+                </button>
+                <button class="btn" id="reset-button">
+                    <span>Reset</span>
+                </button>
+            </div>
+        </div>
         <div class="drawing-area-wrapper">
             <canvas id="drawing-area" width="600" height="600">
                 Your Browser does not support canvas.
             </canvas>
         </div>
    </section>
+
+   <script src="./scripts/notebook.js"></script>
+   <script src="./scripts/calculator.js"></script>
+   <script src="./scripts/coordinates.js"></script>
+   <script src="./scripts/brush.js"></script>
+   <script src="./scripts/painter.js"></script>
+   <script src="./scripts/main.js"></script>
 </body>
 </html>
