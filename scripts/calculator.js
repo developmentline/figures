@@ -1,4 +1,4 @@
-(function(window, document, undefined) {
+var calculator = (function(window, document, undefined) {
     'use strict';
 
     var Calculator = {
@@ -37,6 +37,6 @@
         },
     };
 
-    window.calculator = Calculator;
+    return Object.create(Calculator);
 
 })(window, document);

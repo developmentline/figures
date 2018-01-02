@@ -1,4 +1,4 @@
-(function(window, document, undefined) {
+var brush = (function(window, document, undefined) {
     'use strict';
 
     var Brush = {
@@ -58,6 +58,6 @@
         },
     };
 
-    window.brush = Brush;
+    return Object.create(Brush);
 
 })(window, document);

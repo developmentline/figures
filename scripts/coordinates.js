@@ -1,4 +1,4 @@
-(function(window, document, undefined) {
+var coordinates = (function(window, document, undefined) {
     'use strict';
 
     var Coordinates = {
@@ -42,6 +42,6 @@
         },
     };
 
-    window.coordinates = Coordinates;
+    return Object.create(Coordinates);
 
 })(window, document);

@@ -2,7 +2,7 @@
     'use strict';
 
     var Painter = {
-        init: function(drawingArea, brush, coordinates, calculator, controls, noteBook) {
+        init: function(drawingArea, brush, coordinates, calculator, noteBook, controls) {
             this.drawingArea = drawingArea;
             this.drawingAreaContext = this.drawingArea.getContext("2d");
 
@@ -12,68 +12,47 @@
             this.controls = controls;
             this.noteBook = noteBook;
 
-            this.bindEvent('click', this.drawingArea, this.draw);
-            this.bindEvent('mousedown', this.drawingArea, this.beginImageAdjustment);
-            this.bindEvent('mouseup', this.drawingArea, this.endImageAdjustment);
-            this.bindEvent('mousemove', this.drawingArea, this.redrawImage);
-            this.bindEvent('click', this.controls.resetButton, this.cleanAll);
+            this.on('click', this.drawingArea, this.draw);
+            this.on('mousedown', this.drawingArea, this.beginFigureAdjustment);
+            this.on('mouseup', this.drawingArea, this.endFigureAdjustment);
+            this.on('mousemove', this.drawingArea, this.redrawFigure);
+            this.on('click', this.controls.resetButton, this.cleanAll);
         },
 
-        bindEvent: function(eventName, element, callback) {
-            var self = this;
-            element.addEventListener(eventName, function(e) {
-                callback.call(self, e);
-            });
+        on: function(eventName, element, callback) {
+            element.addEventListener(eventName, callback.bind(this));
         },
 
         draw: function(eventObject) {
             if (!this.allPointsSelected()) {
                 var x = eventObject.layerX;
                 var y = eventObject.layerY;
-                this.addPoint(x, y)
-                    .takeNote()
+                this.takeNotePoint(x, y)
+                    .saveCoordinates(x, y)
                     .drawPoint(x, y)
-                    .onPointAdded();
+                    .drawFigures();
             }
         },
 
-        beginImageAdjustment: function(eventObject) {
+        beginFigureAdjustment: function(eventObject) {
             if (this.allPointsSelected()) {
-                this.dragging = true;
+                this.isDragging = true;
             }
         },
 
-        endImageAdjustment: function() {
-            this.dragging = false;
-            this.onPointAdded();
+        endFigureAdjustment: function() {
+            this.isDragging = false;
         },
 
-        onPointAdded() {
-            if (this.allPointsSelected()) {
-                this.drawParallelogram()
-                    .drawCircle()
-                    .takeNote();
-            }
-        },
-
-        onPointUpdate: function() {
-            this.clearDrawingArea();
-
-            var self = this;
-            this.coordinates.coordinatesList.forEach(function(coordinate) {
-                self.drawPoint(coordinate.x, coordinate.y);
-            });
-        },
-
-        redrawImage: function(eventObject) {
-            if(this.dragging) {
+        redrawFigure: function(eventObject) {
+            if(this.isDragging) {
                 var x = eventObject.layerX;
                 var y = eventObject.layerY;
-                this.adjustPoint(x, y);
+                this.adjustPoint(x, y)
             }
         },
 
-        addPoint: function(x, y) {
+        saveCoordinates: function(x, y) {
             var coordinate = {
                 x: x,
                 y: y
@@ -81,6 +60,13 @@
 
             this.coordinates.add(coordinate);
             return this;
+        },
+
+        drawFigures() {
+            if (this.allPointsSelected()) {
+                this.drawParallelogram()
+                    .drawCircle()
+            }
         },
 
         adjustPoint: function(x, y) {
@@ -100,6 +86,22 @@
             }
 
             return this;
+        },
+
+        onPointUpdate: function() {
+            var coordinates = this.coordinates.all();
+
+            this.clearDrawingArea();
+            this.noteBook.clear();
+
+            for (var index in coordinates) {
+                var x = coordinates[index].x;
+                var y =  coordinates[index].y;
+                this.takeNotePoint(x, y)
+                    .drawPoint(x, y);
+            }
+
+            this.drawFigures();
         },
 
         drawPoint: function(x, y) {
@@ -143,14 +145,16 @@
 
             var center = this.calculator.computeParallelogramCenter(firstVertex, thirdVertex);
 
-            this.area = this.calculator.computeParallelogramArea(
+            var area = this.calculator.computeParallelogramArea(
                 firstVertex,
                 secondVertex,
                 thirdVertex,
                 fourthVertex
             );
 
-            var radius = this.calculator.computeRadiusFromArea(this.area);
+            this.takeNoteArea(area);
+
+            var radius = this.calculator.computeRadiusFromArea(area);
 
             this.brush
                 .pickBrushOfWith(2)
@@ -160,11 +164,18 @@
             return this;
         },
 
-        takeNote: function() {
-            this.noteBook
-                .writePoints(this.coordinates.all())
-                .writeAreas(this.area);
+        takeNotePoint: function(x, y) {
+            var line = '<p>Point :' + '(' + x + ', ' + y + ')</p>';
+            this.noteBook.write(line);
+
             return this;
+        },
+
+        takeNoteArea: function(area) {
+            var parallelogramsLine = '<p>Parallelogram\'s area: ' + area;
+            var circlesLine = '<p>Circle\'s area: ' + area;
+            this.noteBook.write(parallelogramsLine);
+            this.noteBook.write(circlesLine);
         },
 
         cleanAll: function() {
@@ -172,12 +183,12 @@
                 this.clearDrawingArea()
                 this.coordinates.clear();
                 this.noteBook.clear();
-                this.area = null;
             }
         },
 
         clearDrawingArea: function() {
             this.drawingAreaContext.clearRect(0, 0, this.drawingArea.width, this.drawingArea.height);
+            return this;
         },
 
         allPointsSelected: function() {
