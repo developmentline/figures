@@ -21,7 +21,7 @@ var coordinates = (function(window, document, undefined) {
         },
 
         peek: function(position) {
-            var index = position !== undefined ? position : this.coordinatesList.length - 1;
+            var index = (position !== undefined) ? position : this.coordinatesList.length - 1;
             return this.coordinatesList[index];
         },
 
@@ -31,7 +31,7 @@ var coordinates = (function(window, document, undefined) {
                 return self.isDraggingCoordinate(coordinate, newCoordinate, radius);
             });
 
-            return coordinateBeingDragged.length ? coordinateBeingDragged[0] : null;
+            return (coordinateBeingDragged.length) ? coordinateBeingDragged[0] : null;
         },
 
         isDraggingCoordinate: function(coordinate, newCoordinate, radius) {
