@@ -12,13 +12,47 @@ var utils = (function(window, document, undefined) {
         );
     }
 
+    function simulateCoordinates(times, element) {
+        for(var i = 0; i < times; i++) {
+            simulateClickAtPosition(times - i, times + i, element);
+        }
+    };
+
+    function simulateClickAtPosition(x, y, element) {
+        eventInstance = new MouseEvent('click', {
+            clientX: x,
+            clientY: y,
+            bubbles: false,
+            cancelable: false,
+        });
+
+        element.dispatchEvent(eventInstance);
+    };
+
+    function mockContext() {
+        return {
+            beginPath: jasmine.createSpy('beginPath'),
+            closePath: jasmine.createSpy('closePath'),
+            arc: jasmine.createSpy('arc'),
+            stroke: jasmine.createSpy('stroke'),
+            fill: jasmine.createSpy('fill'),
+            lineTo: jasmine.createSpy('lineTo'),
+            moveTo: jasmine.createSpy('moveTo'),
+            strokeStyle: null,
+            lineWidth: null,
+            fillStyle: null,
+        }
+    };
 
     return {
         pageObjects: {
             drawingArea: drawingArea,
             notes: notes,
         },
-        insertFixture: insertFixture
+        mocks: {
+            mockContext: mockContext,
+        },
+        insertFixture: insertFixture,
     };
 
 })(window, document);

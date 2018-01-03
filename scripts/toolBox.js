@@ -1,7 +1,7 @@
-var brush = (function(window, document, undefined) {
+var toolBox = (function(window, document, undefined) {
     'use strict';
 
-    var Brush = {
+    var ToolBox = {
         CIRCLE_END_ANGLE: 2 * Math.PI,
         DEFAULT_CIRCLE_RADIUS: 11 / 2,
         CIRCLE_START_ANGLE: 0,
@@ -33,7 +33,9 @@ var brush = (function(window, document, undefined) {
         drawCircle: function(context, x, y, radius) {
             context.strokeStyle = this.currentColor;
             context.lineWidth = this.currentStrokeWidth;
+
             this.constructArc(context, x, y, radius);
+
             context.stroke();
         },
 
@@ -53,11 +55,11 @@ var brush = (function(window, document, undefined) {
                 context.lineTo(line.x,line.y);
             });
 
-            context.closePath();
             context.stroke();
+            context.closePath();
         },
     };
 
-    return Object.create(Brush);
+    return Object.create(ToolBox);
 
 })(window, document);

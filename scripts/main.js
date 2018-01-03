@@ -14,7 +14,7 @@
 
     painter.init(
         drawingArea,
-        brush,
+        toolBox,
         coordinates,
         calculator,
         noteBook,

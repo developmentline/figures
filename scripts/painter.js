@@ -2,11 +2,11 @@
     'use strict';
 
     var Painter = {
-        init: function(drawingArea, brush, coordinates, calculator, noteBook, controls) {
+        init: function(drawingArea, toolBox, coordinates, calculator, noteBook, controls) {
             this.drawingArea = drawingArea;
             this.drawingAreaContext = this.drawingArea.getContext("2d");
 
-            this.brush = brush;
+            this.toolBox = toolBox;
             this.coordinates = coordinates;
             this.calculator = calculator;
             this.controls = controls;
@@ -76,7 +76,7 @@
             };
             var draggedCoordinate = this.coordinates.getDraggingCoordinate(
                 newCoordinate,
-                this.brush.DEFAULT_CIRCLE_RADIUS
+                this.toolBox.DEFAULT_CIRCLE_RADIUS
             );
 
             if (draggedCoordinate !== null) {
@@ -105,7 +105,7 @@
         },
 
         drawPoint: function(x, y) {
-            this.brush
+            this.toolBox
                 .pickColor('red')
                 .drawFilledCircle(this.drawingAreaContext, x, y);
             return this;
@@ -121,7 +121,7 @@
                 thirdVertex
             );
 
-            this.brush
+            this.toolBox
                 .pickBrushOfWith(2)
                 .pickColor('blue')
                 .drawPolygon(
@@ -156,7 +156,7 @@
 
             var radius = this.calculator.computeRadiusFromArea(area);
 
-            this.brush
+            this.toolBox
                 .pickBrushOfWith(2)
                 .pickColor('yellow')
                 .drawCircle(this.drawingAreaContext, center.x, center.y, radius);
