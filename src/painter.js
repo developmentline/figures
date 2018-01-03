@@ -1,4 +1,4 @@
-(function(window, document, undefined) {
+var painter = (function(window, document, undefined) {
     'use strict';
 
     var Painter = {
@@ -196,6 +196,6 @@
         },
     };
 
-    window.painter = Object.create(Painter);
+    return Object.create(Painter);
 
 })(window, document);
