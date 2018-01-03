@@ -2,7 +2,7 @@ var painter = (function(window, document, undefined) {
     'use strict';
 
     var Painter = {
-        init: function(drawingArea, toolBox, coordinates, calculator, noteBook, controls) {
+        init: function(drawingArea, toolBox, calculator, noteBook, controls, coordinates) {
             this.drawingArea = drawingArea;
             this.drawingAreaContext = this.drawingArea.getContext("2d");
 

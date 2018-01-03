@@ -15,10 +15,10 @@
     painter.init(
         drawingArea,
         toolBox,
-        coordinates,
         calculator,
         noteBook,
-        controls
+        controls,
+        coordinates,
     );
 
 
