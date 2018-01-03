@@ -15,15 +15,13 @@ module.exports = function(config) {
             'src/calculator.js',
             'src/coordinates.js',
             'src/toolBox.js',
-            // 'src/painter.js',
-            // 'src/main.js',
+            'src/painter.js',
             '__test__/utils/utils.js',
             '__test__/notebook.spec.js',
             '__test__/calculator.spec.js',
             '__test__/coordinates.spec.js',
             '__test__/toolBox.spec.js',
-            // '__test__/painter.spec.js',
-            // '__test__/main.spec.js',
+            '__test__/painter.spec.js',
         ],
 
         // web server port

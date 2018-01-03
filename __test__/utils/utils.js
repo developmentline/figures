@@ -5,6 +5,8 @@ var utils = (function(window, document, undefined) {
 
     var notes = '<div class="notes" id="note-book"></div>';
 
+    var controls = '<div class="controls"><button class="btn" id="about-button"><span>About</span></button><button class="btn" id="reset-button"><span>Reset</span></button></div>';
+
     function insertFixture(fixture) {
         document.body.insertAdjacentHTML(
             'afterbegin',
@@ -19,7 +21,7 @@ var utils = (function(window, document, undefined) {
     };
 
     function simulateClickAtPosition(x, y, element) {
-        eventInstance = new MouseEvent('click', {
+        var eventInstance = new MouseEvent('click', {
             clientX: x,
             clientY: y,
             bubbles: false,
@@ -27,6 +29,13 @@ var utils = (function(window, document, undefined) {
         });
 
         element.dispatchEvent(eventInstance);
+
+        var coordinates = {
+            x: eventInstance.layerX,
+            y: eventInstance.layerY,
+        };
+
+        return coordinates;
     };
 
     function mockContext() {
@@ -48,11 +57,14 @@ var utils = (function(window, document, undefined) {
         pageObjects: {
             drawingArea: drawingArea,
             notes: notes,
+            controls: controls,
         },
         mocks: {
             mockContext: mockContext,
         },
         insertFixture: insertFixture,
+        simulateClickAtPosition: simulateClickAtPosition,
+        simulateCoordinates: simulateCoordinates,
     };
 
 })(window, document);

@@ -165,7 +165,7 @@ var painter = (function(window, document, undefined) {
         },
 
         takeNotePoint: function(x, y) {
-            var line = '<p>Point :' + '(' + x + ', ' + y + ')</p>';
+            var line = '<p>Point: (' + x + ', ' + y + ')</p>';
             this.noteBook.write(line);
 
             return this;
