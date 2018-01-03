@@ -11,12 +11,12 @@ module.exports = function(config) {
         // list of files / patterns to load in the browser
         //  note: IS ORDER-DEPENDENT
         files: [
-            'scripts/notebook.js',
-            'scripts/calculator.js',
-            'scripts/coordinates.js',
-            'scripts/toolBox.js',
-            // 'scripts/painter.js',
-            // 'scripts/main.js',
+            'src/notebook.js',
+            'src/calculator.js',
+            'src/coordinates.js',
+            'src/toolBox.js',
+            // 'src/painter.js',
+            // 'src/main.js',
             '__test__/utils/utils.js',
             '__test__/notebook.spec.js',
             '__test__/calculator.spec.js',
