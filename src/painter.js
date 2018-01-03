@@ -17,6 +17,7 @@ var painter = (function(window, document, undefined) {
             this.on('mouseup', this.drawingArea, this.endFigureAdjustment);
             this.on('mousemove', this.drawingArea, this.redrawFigure);
             this.on('click', this.controls.resetButton, this.cleanAll);
+            this.on('click', this.controls.aboutButton, this.toggleAbout);
         },
 
         on: function(eventName, element, callback) {
@@ -193,6 +194,15 @@ var painter = (function(window, document, undefined) {
 
         allPointsSelected: function() {
             return this.coordinates.count() === 3;
+        },
+
+        toggleAbout: function() {
+            var classList = document.getElementById('about-section').classList;
+            if (classList.contains('visible')) {
+                classList.remove('visible');
+            } else {
+                classList.add('visible');
+            }
         },
     };
 
