@@ -1,11 +1,9 @@
 {
-  "name": "draw_it_up",
+  "name": "figures",
   "version": "1.0.0",
   "description": "A basic project to draw parallelograms and circles ",
   "main": "index.html",
   "dependencies": {
-    "jasmine-core": "^2.8.0",
-    "karma-jasmine": "^1.1.1"
   },
   "devDependencies": {
     "jasmine-core": "^2.8.0",
@@ -14,7 +12,7 @@
     "karma-jasmine": "^1.1.1"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "bin/test"
   },
   "author": "Julian Rios",
   "license": "MIT"
